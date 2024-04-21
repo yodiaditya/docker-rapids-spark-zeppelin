@@ -1,0 +1,23 @@
+services:
+  zeppelin:
+    container_name: zeppelin
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: local-zeppelin:latest
+    ports:
+      - "9999:8080"
+    environment:
+      SPARK_HOME: /opt/zeppelin/spark
+      ZEPPELIN_LOG_DIR: /opt/zeppelin/logs
+      ZEPPELIN_NOTEBOOK_DIR: /opt/zeppelin/notebook
+    volumes:
+      - ./notebook:/opt/zeppelin/notebook
+      - ./data:/data
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            device_ids: ['0']
+            capabilities: [gpu]

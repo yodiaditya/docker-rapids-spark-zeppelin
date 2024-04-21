@@ -1,0 +1,16 @@
+name: python_3_with_R
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python >=3.8,<3.9
+  - pycodestyle
+  - numpy
+  - pandas
+  - scipy
+  - pandasql  
+  - panel
+  - pyyaml
+  - matplotlib
+  - scikit-learn
+  - seaborn
