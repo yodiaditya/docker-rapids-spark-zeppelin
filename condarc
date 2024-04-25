@@ -1,0 +1,8 @@
+auto_update_conda: false
+channel_priority: flexible
+pkgs_dirs:
+  - /opt/zeppelin/conda-cache
+channels:
+  - nvidia
+  - rapidsai
+  - conda-forge

@@ -1,11 +1,13 @@
-# Docker Zeppelin + Spark Simple Standalone Cluster
-Repository to create spark/zeppelin development environment. 
-Works with NVIDIA GPU attached. 
+# Docker Zeppelin + Spark + RAPIDS AI
+Repository to create spark, zeppelin and rapidsai NVIDIA GPU development environment. 
+Works with NVIDIA both consumer and enterprise GPU attached. 
+
+Using the latest version Spark `3.5.1` and Zeppelin `0.11.1` base image
 
 This will running Spark Master and Node to replicate near production environment.  
 You can extend this with Zeppelin, Spark, Flink, DuckDB, Parquet, Tensorflow, PyTorch and many more.  
 
-This already tested with local PC and laptop running on Ubuntu 23.10 and RTX 4090 
+This already tested with local PC and laptop running on Ubuntu 23.10 and RTX 4090.
 
 ## Pre-requisites
 
@@ -15,9 +17,19 @@ Clone this git and download required packages into project folder
 git clone https://github.com/yodiaditya/docker-zeppelin-spark.git zeppelin-simple
 cd zeppelin-simple
 wget -c https://github.com/conda-forge/miniforge/releases/download/24.3.0-0/Mambaforge-24.3.0-0-Linux-x86_64.sh
-wget -c https://archive.apache.org/dist/spark/spark-3.2.4/spark-3.2.4-bin-hadoop3.2.tgz
+wget -c https://dlcdn.apache.org/spark/spark-3.5.1/spark-3.5.1-bin-hadoop3.tgz
 
 ```
+
+## Conda / Mamba Package Cache 
+Copy folder `conda-cache` in Docker after first installation 
+
+```
+docker cp <container_id>:/opt/zeppelin/conda-cache .
+```
+
+Use root by `docker exec -u 0 -it zeppelin bash` for mamba or conda installation. 
+While pip should be works using another `pip-cache` folder.
 
 ## Building and Runnning
 

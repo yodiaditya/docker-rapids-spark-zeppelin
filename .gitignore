@@ -1,3 +1,7 @@
 *.sh
 *.tgz
 rankfm
+notebook/*
+data/*
+cuda
+conda-cache
