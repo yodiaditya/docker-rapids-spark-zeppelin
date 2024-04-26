@@ -1,7 +1,4 @@
 name: python_3_with_R
-channels:
-  - conda-forge
-  - defaults
 dependencies:
   - python >=3.8,<3.9
   - pycodestyle
@@ -14,3 +11,8 @@ dependencies:
   - matplotlib
   - scikit-learn
   - seaborn
+  - pyspark
+  - cuml
+  - cupy
+  - rapids
+  - psutil

@@ -12,7 +12,7 @@ RUN rm -f /etc/apt/apt.conf.d/docker-clean
 RUN --mount=type=cache,target=/var/cache/apt \
         	apt-get update && \
 	        apt-get install -yqq --no-install-recommends \
-            libnss-wrapper gcc git wget vim build-essential libxml2 nvtop rsync tini libarchive13
+            libnss-wrapper gcc git wget vim build-essential libxml2 nvtop rsync tini libarchive13 libnuma-dev
 
 # SPARK 3.5.1 INSTALLATION
 COPY ./spark-3.5.1-bin-hadoop3.tgz /tmp/spark-3.5.1-bin-hadoop3.tgz
@@ -59,10 +59,10 @@ COPY ./Mambaforge-24.3.0-0-Linux-x86_64.sh ${ZEPPELIN_HOME}/miniforge.sh
 COPY ./condarc /etc/conda/.condarc
 
 # Create cache dir for RAPIDS ML installation 4GB
-# RUN  mkdir -p ${ZEPPELIN_HOME}/conda-cache
+RUN  mkdir -p ${ZEPPELIN_HOME}/conda-cache
 
 # Copy the conda cache to the docker image
-COPY ./conda-cache ${ZEPPELIN_HOME}/
+# COPY ./conda-cache ${ZEPPELIN_HOME}/
 
 RUN set -ex && rm -rf /opt/conda && \
     bash  ${ZEPPELIN_HOME}/miniforge.sh -b -p /opt/conda && \
@@ -91,8 +91,8 @@ USER 1000
 ENV PATH="/opt/conda/envs/python_3_with_R/bin:/opt/conda/conda/bin:$PATH"
 ENV PATH=/opt/zeppelin/.local/bin:$PATH
 
-# Install arapids
-RUN pip install -y spark_rapids_ml
+# Install rapids
+RUN pip install spark_rapids_ml
 
 # # spark UI port 
 # EXPOSE 4040
